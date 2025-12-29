@@ -98,14 +98,16 @@
                             <h4 id="popupPrice" class="text-primary fw-bold mb-3"></h4>
                             <hr>
                             <p id="popupDesc" class="text-muted mb-4"></p>
+                            
                             <div class="mb-4">
                                 <label class="form-label fw-bold small">Select Size</label>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">2Y</button>
-                                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">4Y</button>
-                                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">6Y</button>
+                                <div class="d-flex gap-2" id="sizeSelector">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="selectSize(this, '2Y')">2Y</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="selectSize(this, '4Y')">4Y</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="selectSize(this, '6Y')">6Y</button>
                                 </div>
                             </div>
+                            
                             <button id="modalAddToCart" class="btn btn-primary btn-lg rounded-pill w-100 shadow-sm py-3 fw-bold">Add to Bag 🛍️</button>
                         </div>
                     </div>
@@ -119,8 +121,7 @@
             <h5 class="fw-bold m-0">Your Bag</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
-        <div class="offcanvas-body" id="cartItems">
-            </div>
+        <div class="offcanvas-body" id="cartItems"></div>
         <div class="p-4 border-top">
             <div class="d-flex justify-content-between mb-3">
                 <span class="fw-bold">Total:</span>
