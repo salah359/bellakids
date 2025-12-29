@@ -22,7 +22,7 @@ function renderProducts() {
     renderProductsToGrid(productsToDisplay);
 }
 
-// NEW: Unified function to display items (used by initial load and search)
+// Unified function to display items (used by initial load and search)
 function renderProductsToGrid(productsToDisplay) {
     const productGrid = document.getElementById('product-grid');
     if (!productGrid) return;
@@ -51,7 +51,7 @@ function renderProductsToGrid(productsToDisplay) {
     `).join('');
 }
 
-// NEW: Search Filter Logic
+// Search Filter Logic
 function filterSearch() {
     const searchTerm = document.getElementById('productSearch').value.toLowerCase();
     const currentCat = getCurrentCategory();
@@ -168,13 +168,28 @@ function updateCartUI() {
     }
 }
 
-// 6. WhatsApp Order
+// 6. WhatsApp Order (Formatted for Clarity)
 function sendToWhatsApp() {
-    if (cart.length === 0) return alert("Your bag is empty!");
+    if (cart.length === 0) return alert("Your bag is empty! 🛍️");
     
-    const message = "Hi Bella Kids! I want to order:\n" + 
-                    cart.map(i => `- ${i.name} (Size: ${i.selectedSize}) [$${i.price} x ${i.quantity}]`).join('\n') +
-                    `\n\nTotal: $${cart.reduce((s, i) => s + (i.price * i.quantity), 0).toFixed(2)}`;
+    // Header
+    let message = "🌟 *New Order from Bella Kids* 🌟\n\n";
+    message += "I'd like to order the following items:\n\n";
+
+    // Item List
+    cart.forEach((item, index) => {
+        message += `${index + 1}. *${item.name}*\n`;
+        message += `   Size: ${item.selectedSize}\n`;
+        message += `   Price: $${item.price.toFixed(2)} x ${item.quantity}\n\n`;
+    });
+
+    // Total Calculation
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    message += `--------------------------\n`;
+    message += `💰 *Total Amount: $${total.toFixed(2)}*\n\n`;
+    message += "Please let me know the delivery details! ✨";
     
-    window.open(`https://wa.me/YOUR_PHONE_NUMBER?text=${encodeURIComponent(message)}`);
+    // Note: Change 'YOUR_PHONE_NUMBER' to your actual WhatsApp number (e.g., 970599000000)
+    const phoneNumber = "+972 59-843-9251"; 
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
