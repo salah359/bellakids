@@ -190,7 +190,8 @@ function sendToWhatsApp() {
     message += "Please let me know the delivery details! ✨";
     
     // Note: Change 'YOUR_PHONE_NUMBER' to your actual WhatsApp number (e.g., 970599000000)
-    const phoneNumber = "074444450936"; 
+    const phoneNumber = "07444450936"; 
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
+
 
