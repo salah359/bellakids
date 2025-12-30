@@ -321,3 +321,41 @@ function sendToWhatsApp() {
     const phoneNumber = "972598439251"; 
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
+
+function createBalloons() {
+    const container = document.createElement('div');
+    container.id = 'balloon-container';
+    document.body.appendChild(container);
+
+    // Array of brand-friendly colors (Pastels)
+    const colors = ['#A2D2FF', '#FFC8DD', '#FFAFCC', '#BDE0FE', '#CDB4DB'];
+
+    for (let i = 0; i < 15; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        
+        // Randomize appearance
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.floor(Math.random() * 90); // 0-90% of screen width
+        const duration = 5 + Math.random() * 5;     // 5-10 seconds speed
+        const delay = Math.random() * 3;            // Staggered start
+
+        balloon.style.backgroundColor = color;
+        balloon.style.left = left + '%';
+        balloon.style.animationDuration = duration + 's';
+        balloon.style.animationDelay = delay + 's';
+
+        container.appendChild(balloon);
+    }
+
+    // Clean up: Remove the container after balloons finish floating
+    setTimeout(() => {
+        container.remove();
+    }, 15000);
+}
+
+// Trigger when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    createBalloons();
+    // Your existing applyTranslations(), etc.
+});
