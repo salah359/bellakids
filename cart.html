@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Bag | Bella Kids</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg glass-nav mb-5">
+        <div class="container text-center">
+            <a class="navbar-brand fw-bold text-primary mx-auto" href="index.html">BELLA KIDS</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="fw-bold mb-5">Your Shopping Bag</h2>
+        <div class="row g-4">
+            <div class="col-lg-8" id="cart-items-container">
+                </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm p-4 rounded-5 sticky-top" style="top: 100px;">
+                    <h4 class="fw-bold mb-4">Summary</h4>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span id="subtotal" class="fw-bold">$0.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span>Delivery (Ramallah)</span>
+                        <span class="text-success fw-bold">FREE</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fs-5 fw-bold">Total</span>
+                        <span id="total-price" class="fs-4 fw-bold text-primary">$0.00</span>
+                    </div>
+                    <button class="btn btn-primary btn-lg w-100 rounded-pill py-3 fw-bold">Complete Order</button>
+                    <p class="text-center mt-3 small text-muted">Or pay via WhatsApp / On Delivery</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/cart-logic.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+/* --- BELLA KIDS BRAND PALETTE --- */
+:root {
+    --bella-blue: #A2D2FF;
+    --bella-pink: #FF9AA2;
+    --bella-green: #B9FBC0;
+    --bella-cream: #FAF9F6;
+    --bella-dark: #2D3436;
+    --glass-white: rgba(255, 255, 255, 0.85);
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* --- GLOBAL STYLES --- */
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bella-cream);
+    color: var(--bella-dark);
+    overflow-x: hidden;
+}
+
+/* --- NAVIGATION & ENHANCED LOGO --- */
+.glass-nav {
+    background: var(--glass-white);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 2px solid rgba(0,0,0,0.03);
+    padding: 5px 0;
+}
+
+.nav-logo {
+    height: 80px; /* Big official logo */
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition);
+    padding: 5px 0;
+}
+
+.navbar-brand:hover .nav-logo {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--bella-dark) !important;
+    margin: 0 12px;
+}
+
+/* Responsive adjustment for phones */
+@media (max-width: 768px) {
+    .nav-logo {
+        height: 60px; 
+    }
+}
+
+/* --- FLOATING BUBBLES (STACKED ON RIGHT) --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* Base position */
+    width: 65px;
+    height: 65px;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.cart-float {
+    position: fixed;
+    bottom: 110px; /* Stacked above WhatsApp (30px + 65px + margin) */
+    right: 30px; /* Moved to right side */
+    width: 65px;
+    height: 65px;
+    background-color: var(--bella-blue);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(162, 210, 255, 0.4);
+    z-index: 1000;
+    transition: var(--transition);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.cart-float:hover, .whatsapp-float:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.whatsapp-float img { width: 35px; }
+
+/* Mobile adjustments for stacked bubbles */
+@media (max-width: 768px) {
+    .whatsapp-float, .cart-float {
+        width: 55px;
+        height: 55px;
+        right: 20px;
+    }
+    .whatsapp-float { bottom: 20px; }
+    .cart-float { bottom: 85px; }
+}
+
+/* --- SEARCH BAR --- */
+.input-group {
+    border: 2px solid #eee;
+    transition: var(--transition);
+}
+
+.input-group:focus-within {
+    border-color: var(--bella-blue);
+    transform: translateY(-2px);
+}
+
+#productSearch:focus {
+    box-shadow: none;
+}
+
+/* --- HERO & VIDEO ZOOM FIX --- */
+.hero-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+}
+
+.hero-image-wrapper {
+    position: relative;
+    padding: 0; 
+    overflow: hidden; 
+    border-radius: 40px;
+    aspect-ratio: 1 / 1; 
+    max-width: 500px;
+    margin: 0 auto;
+    border: 8px solid white;
+    box-shadow: 0 20px 40px rgba(162, 210, 255, 0.3);
+}
+
+video.hero-animation, .hero-animation {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    display: block;
+    transform: scale(1.2); /* Fix for black bits */
+    transform-origin: center center;
+}
+
+.floating-animation {
+    animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translate(0, 0px) scale(1.2); }
+    50% { transform: translate(0, -20px) scale(1.2); }
+    100% { transform: translate(0, 0px) scale(1.2); }
+}
+
+/* --- CATEGORY & PRODUCT CARDS --- */
+.cat-card {
+    min-height: 280px;
+    border-radius: 40px;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cat-card:hover {
+    transform: scale(1.03);
+}
+
+.boys-bg { background-color: #E3F2FD; }
+.girls-bg { background-color: #FCE4EC; }
+
+.product-card {
+    border: none !important;
+    border-radius: 30px !important;
+    background: #ffffff;
+    padding: 15px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+}
+
+.product-card img {
+    border-radius: 20px;
+    width: 100%;
+    height: 250px;
+    object-fit: cover; 
+}
+
+/* --- BUTTONS & SIZE SELECTOR --- */
+.btn-primary {
+    background-color: var(--bella-blue) !important;
+    border: none !important;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    filter: brightness(1.1);
+}
+
+#sizeSelector .btn {
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+#sizeSelector .btn-primary.text-white {
+    background-color: var(--bella-blue) !important;
+    border-color: var(--bella-blue) !important;
+}
+
+.btn-secondary, .btn-outline-secondary {
+    border-color: var(--bella-pink);
+    color: var(--bella-pink);
+    font-weight: 700;
+}
+
+/* --- UTILITIES --- */
+.bg-primary { background-color: var(--bella-blue) !important; }
+.text-primary { color: var(--bella-blue) !important; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: var(--bella-blue); border-radius: 10px; }
