@@ -3,14 +3,14 @@ let cart = JSON.parse(localStorage.getItem('BELLA_KIDS_CART')) || [];
 let selectedSize = null; 
 
 /**
- * UPDATED: Default to 'ar' (Arabic) instead of 'en'
- * If no language preference is found in localStorage, 'ar' is used.
+ * Default to 'ar' (Arabic) instead of 'en' for new visitors
  */
 let currentLanguage = localStorage.getItem('BELLA_LANGUAGE') || 'ar';
 
 // Translation Dictionary
 const translations = {
     "en": {
+        "delivery-bar": "✨ Fast Delivery within Ramallah & Surrounding Areas! ✨",
         "nav-home": "Home",
         "nav-boys": "Boys",
         "nav-girls": "Girls",
@@ -38,6 +38,7 @@ const translations = {
         "currency": "₪"
     },
     "ar": {
+        "delivery-bar": "✨ خدمة توصيل سريعة لرام الله والمناطق المجاورة! ✨",
         "nav-home": "الرئيسية",
         "nav-boys": "الأولاد",
         "nav-girls": "البنات",
@@ -67,7 +68,6 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Force initial language check based on currentLanguage
     applyTranslations();
     renderProducts();
     updateCartUI();
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Translation Logic ---
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-    localStorage.setItem('BELLA_LANGUAGE', currentLanguage); //
+    localStorage.setItem('BELLA_LANGUAGE', currentLanguage);
     applyTranslations();
 }
 
@@ -96,7 +96,6 @@ function applyTranslations() {
     }
 
     // 3. Adjust Layout Direction for RTL support
-    // This ensures the website flips to right-to-left layout immediately
     document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLanguage;
 
@@ -114,10 +113,9 @@ function getCurrentCategory() {
     return null;
 }
 
-// 2. Render Products Logic (Updated for Array Categories)
+// 2. Render Products Logic
 function renderProducts() {
     const currentCat = getCurrentCategory();
-    // Use .includes() because product.category is an array
     const productsToDisplay = currentCat ? 
         products.filter(p => p.category.includes(currentCat)) : 
         products;
@@ -208,7 +206,8 @@ function openProductDetails(productId) {
     document.getElementById('popupDesc').innerText = desc;
     document.getElementById('popupImage').src = product.image;
 
-    const sizeLabel = document.querySelector('label[data-i18n-key="select-size"]');
+    // Update Modal static text
+    const sizeLabel = document.querySelector('[data-i18n-key="select-size"]');
     if(sizeLabel) sizeLabel.innerText = translations[currentLanguage]['select-size'];
     document.getElementById('modalAddToCart').innerText = translations[currentLanguage]['add-to-bag'];
 
