@@ -1,9 +1,14 @@
 // 1. Initialize Cart & Language
 let cart = JSON.parse(localStorage.getItem('BELLA_KIDS_CART')) || [];
 let selectedSize = null; 
-let currentLanguage = localStorage.getItem('BELLA_LANGUAGE') || 'en';
 
-// Translation Dictionary (Expanded for all categories)
+/**
+ * UPDATED: Default to 'ar' (Arabic) instead of 'en'
+ * If no language preference is found in localStorage, 'ar' is used.
+ */
+let currentLanguage = localStorage.getItem('BELLA_LANGUAGE') || 'ar';
+
+// Translation Dictionary
 const translations = {
     "en": {
         "nav-home": "Home",
@@ -62,6 +67,7 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Force initial language check based on currentLanguage
     applyTranslations();
     renderProducts();
     updateCartUI();
@@ -70,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Translation Logic ---
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-    localStorage.setItem('BELLA_LANGUAGE', currentLanguage);
+    localStorage.setItem('BELLA_LANGUAGE', currentLanguage); //
     applyTranslations();
 }
 
@@ -90,6 +96,7 @@ function applyTranslations() {
     }
 
     // 3. Adjust Layout Direction for RTL support
+    // This ensures the website flips to right-to-left layout immediately
     document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLanguage;
 
@@ -110,7 +117,7 @@ function getCurrentCategory() {
 // 2. Render Products Logic (Updated for Array Categories)
 function renderProducts() {
     const currentCat = getCurrentCategory();
-    // Use .includes() because product.category is now an array in products.js
+    // Use .includes() because product.category is an array
     const productsToDisplay = currentCat ? 
         products.filter(p => p.category.includes(currentCat)) : 
         products;
@@ -150,17 +157,15 @@ function renderProductsToGrid(productsToDisplay) {
     `}).join('');
 }
 
-// Search Filter Logic (Updated for Array Categories)
+// Search Filter Logic
 function filterSearch() {
     const searchTerm = document.getElementById('productSearch').value.toLowerCase();
     const currentCat = getCurrentCategory();
     
-    // First filter by category array
     const categoryProducts = currentCat ? 
         products.filter(p => p.category.includes(currentCat)) : 
         products;
 
-    // Then filter by search term
     const filtered = categoryProducts.filter(product => 
         (product.name_en && product.name_en.toLowerCase().includes(searchTerm)) || 
         (product.name_ar && product.name_ar.toLowerCase().includes(searchTerm)) ||
@@ -203,7 +208,6 @@ function openProductDetails(productId) {
     document.getElementById('popupDesc').innerText = desc;
     document.getElementById('popupImage').src = product.image;
 
-    // Update Modal static text using keys
     const sizeLabel = document.querySelector('label[data-i18n-key="select-size"]');
     if(sizeLabel) sizeLabel.innerText = translations[currentLanguage]['select-size'];
     document.getElementById('modalAddToCart').innerText = translations[currentLanguage]['add-to-bag'];
