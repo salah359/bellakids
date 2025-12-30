@@ -296,20 +296,12 @@ function updateCartUI() {
 }
 
 // 6. WhatsApp Order (Emoji-Free with Note Support)
+// 6. WhatsApp Order (Clean Version - Note Support Removed)
 function sendToWhatsApp() {
     const isEn = currentLanguage === 'en';
     if (cart.length === 0) return alert(translations[currentLanguage]['empty-bag']);
-
-    // Capture the note from the textarea
-    const note = document.getElementById('customerNote').value;
     
     let message = isEn ? "*New Order from Bella Kids*\n\n" : "*طلب جديد من بيلا كيدز*\n\n";
-    
-    // Add the Customer Note/Address to the top
-    if (note) {
-        message += isEn ? `*Customer Note:* ${note}\n\n` : `*ملاحظات الزبون:* ${note}\n\n`;
-    }
-
     message += isEn ? "I would like to order the following items:\n\n" : "أود طلب القطع التالية:\n\n";
 
     const currency = translations[currentLanguage]['currency'];
