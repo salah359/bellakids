@@ -31,14 +31,16 @@ const translations = {
         "new-arrivals": "New Arrivals",
         "bag-btn": "Bag",
         "search-placeholder": "Search the collection...",
-        "empty-bag": "Your bag is empty 🦁",
+        "empty-bag": "Your bag is empty",
         "total": "Total:",
         "whatsapp-btn": "ORDER ON WHATSAPP",
         "select-size": "Select Size",
-        "add-to-bag": "Add to Bag 🛍️",
-        "no-search": "No items found matching your search 🧸",
-        "alert-size": "Please select a size first! 🌸",
-        "currency": "₪"
+        "add-to-bag": "Add to Bag",
+        "no-search": "No items found matching your search",
+        "alert-size": "Please select a size first!",
+        "currency": "₪",
+        "note-label": "Delivery Address or Notes",
+        "note-placeholder": "Enter your address here..."
     },
     "ar": {
         "delivery-bar": "✨ خدمة توصيل سريعة لرام الله والمناطق المجاورة! ✨",
@@ -62,14 +64,16 @@ const translations = {
         "new-arrivals": "وصلنا حديثاً",
         "bag-btn": "الحقيبة",
         "search-placeholder": "ابحث في التشكيلة...",
-        "empty-bag": "حقيبتك فارغة 🦁",
+        "empty-bag": "حقيبتك فارغة",
         "total": "المجموع:",
         "whatsapp-btn": "اطلب عبر واتساب",
         "select-size": "اختر المقاس",
-        "add-to-bag": "أضف إلى الحقيبة 🛍️",
-        "no-search": "لم يتم العثور على نتائج للبحث 🧸",
-        "alert-size": "يرجى اختيار المقاس أولاً! 🌸",
-        "currency": "₪"
+        "add-to-bag": "أضف إلى الحقيبة",
+        "no-search": "لم يتم العثور على نتائج للبحث",
+        "alert-size": "يرجى اختيار المقاس أولاً!",
+        "currency": "₪",
+        "note-label": "عنوان التوصيل أو ملاحظات",
+        "note-placeholder": "أدخل عنوانك هنا..."
     }
 };
 
@@ -87,7 +91,6 @@ function toggleLanguage() {
 }
 
 function applyTranslations() {
-    // 1. Update text content for elements with data-i18n-key
     document.querySelectorAll('[data-i18n-key]').forEach(element => {
         const key = element.getAttribute('data-i18n-key');
         if (translations[currentLanguage][key]) {
@@ -95,17 +98,19 @@ function applyTranslations() {
         }
     });
 
-    // 2. Update search placeholder
     const searchInput = document.getElementById('productSearch');
     if (searchInput) {
         searchInput.placeholder = translations[currentLanguage]['search-placeholder'];
     }
 
-    // 3. Adjust Layout Direction for RTL support
+    const noteInput = document.getElementById('customerNote');
+    if (noteInput) {
+        noteInput.placeholder = translations[currentLanguage]['note-placeholder'];
+    }
+
     document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLanguage;
 
-    // 4. Refresh dynamic UI elements
     renderProducts();
     updateCartUI();
 }
@@ -212,7 +217,6 @@ function openProductDetails(productId) {
     document.getElementById('popupDesc').innerText = desc;
     document.getElementById('popupImage').src = product.image;
 
-    // Update Modal static text
     const sizeLabel = document.querySelector('[data-i18n-key="select-size"]');
     if(sizeLabel) sizeLabel.innerText = translations[currentLanguage]['select-size'];
     document.getElementById('modalAddToCart').innerText = translations[currentLanguage]['add-to-bag'];
@@ -291,13 +295,22 @@ function updateCartUI() {
     }
 }
 
-// 6. WhatsApp Order
+// 6. WhatsApp Order (Emoji-Free with Note Support)
 function sendToWhatsApp() {
     const isEn = currentLanguage === 'en';
     if (cart.length === 0) return alert(translations[currentLanguage]['empty-bag']);
+
+    // Capture the note from the textarea
+    const note = document.getElementById('customerNote').value;
     
-    let message = isEn  " *New Order from Bella Kids* \n\n" : " *طلب جديد من بيلا كيدز* \n\n";
-    message += isEn  "I'd like to order the following items:\n\n" : "أود طلب القطع التالية:\n\n";
+    let message = isEn ? "*New Order from Bella Kids*\n\n" : "*طلب جديد من بيلا كيدز*\n\n";
+    
+    // Add the Customer Note/Address to the top
+    if (note) {
+        message += isEn ? `*Customer Note:* ${note}\n\n` : `*ملاحظات الزبون:* ${note}\n\n`;
+    }
+
+    message += isEn ? "I would like to order the following items:\n\n" : "أود طلب القطع التالية:\n\n";
 
     const currency = translations[currentLanguage]['currency'];
 
@@ -310,11 +323,9 @@ function sendToWhatsApp() {
 
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `--------------------------\n`;
-    message += ` *${translations[currentLanguage]['total']} ${currency}${total.toFixed(2)}*\n\n`;
-    message += isEn  "Please let me know the delivery details!" : "يرجى إعلامي بتفاصيل التوصيل! ";
+    message += `*${translations[currentLanguage]['total']} ${currency}${total.toFixed(2)}*\n\n`;
+    message += isEn ? "Please let me know the delivery details." : "يرجى إعلامي بتفاصيل التوصيل.";
     
     const phoneNumber = "972598439251"; 
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
-
-
