@@ -3,7 +3,7 @@ let cart = JSON.parse(localStorage.getItem('BELLA_KIDS_CART')) || [];
 let selectedSize = null; 
 
 /**
- * Default to 'ar' (Arabic) instead of 'en' for new visitors
+ * Default to 'ar' (Arabic) for new visitors
  */
 let currentLanguage = localStorage.getItem('BELLA_LANGUAGE') || 'ar';
 
@@ -38,9 +38,7 @@ const translations = {
         "add-to-bag": "Add to Bag",
         "no-search": "No items found matching your search",
         "alert-size": "Please select a size first!",
-        "currency": "₪",
-        "note-label": "Delivery Address or Notes",
-        "note-placeholder": "Enter your address here..."
+        "currency": "₪"
     },
     "ar": {
         "delivery-bar": "✨ خدمة توصيل سريعة لرام الله والمناطق المجاورة! ✨",
@@ -71,13 +69,18 @@ const translations = {
         "add-to-bag": "أضف إلى الحقيبة",
         "no-search": "لم يتم العثور على نتائج للبحث",
         "alert-size": "يرجى اختيار المقاس أولاً!",
-        "currency": "₪",
-        "note-label": "عنوان التوصيل أو ملاحظات",
-        "note-placeholder": "أدخل عنوانك هنا..."
+        "currency": "₪"
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if on homepage for balloons
+    const path = window.location.pathname;
+    const page = path.split("/").pop();
+    if (page === "index.html" || page === "" || page === "/") {
+        createBalloons();
+    }
+
     applyTranslations();
     renderProducts();
     updateCartUI();
@@ -101,11 +104,6 @@ function applyTranslations() {
     const searchInput = document.getElementById('productSearch');
     if (searchInput) {
         searchInput.placeholder = translations[currentLanguage]['search-placeholder'];
-    }
-
-    const noteInput = document.getElementById('customerNote');
-    if (noteInput) {
-        noteInput.placeholder = translations[currentLanguage]['note-placeholder'];
     }
 
     document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
@@ -295,8 +293,7 @@ function updateCartUI() {
     }
 }
 
-// 6. WhatsApp Order (Emoji-Free with Note Support)
-// 6. WhatsApp Order (Clean Version - Note Support Removed)
+// 6. WhatsApp Order (Clean - No Emoji, No Notes)
 function sendToWhatsApp() {
     const isEn = currentLanguage === 'en';
     if (cart.length === 0) return alert(translations[currentLanguage]['empty-bag']);
@@ -322,23 +319,22 @@ function sendToWhatsApp() {
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
+// 7. Homepage Balloons
 function createBalloons() {
     const container = document.createElement('div');
     container.id = 'balloon-container';
     document.body.appendChild(container);
 
-    // Array of brand-friendly colors (Pastels)
     const colors = ['#A2D2FF', '#FFC8DD', '#FFAFCC', '#BDE0FE', '#CDB4DB'];
 
     for (let i = 0; i < 15; i++) {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
         
-        // Randomize appearance
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const left = Math.floor(Math.random() * 90); // 0-90% of screen width
-        const duration = 5 + Math.random() * 5;     // 5-10 seconds speed
-        const delay = Math.random() * 3;            // Staggered start
+        const left = Math.floor(Math.random() * 90); 
+        const duration = 5 + Math.random() * 5;     
+        const delay = Math.random() * 3;            
 
         balloon.style.backgroundColor = color;
         balloon.style.left = left + '%';
@@ -348,14 +344,7 @@ function createBalloons() {
         container.appendChild(balloon);
     }
 
-    // Clean up: Remove the container after balloons finish floating
     setTimeout(() => {
         container.remove();
     }, 15000);
 }
-
-// Trigger when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    createBalloons();
-    // Your existing applyTranslations(), etc.
-});
