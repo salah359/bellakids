@@ -11,6 +11,9 @@ let currentLanguage = localStorage.getItem('BELLA_LANGUAGE') || 'ar';
 const translations = {
     "en": {
         "delivery-bar": "✨ Fast Delivery within Ramallah & Surrounding Areas! ✨",
+        "boys-delivery-bar": "💙 Awesome Gear for Brave Boys - Fast Delivery in Ramallah! 💙",
+        "girls-delivery-bar": "🌸 Magical Outfits for Little Princesses - Shop the Collection! 🌸",
+        "newborn-delivery-bar": "🍼 Gentle Care for Your New Arrivals - Fast Delivery in Ramallah! 🍼",
         "nav-home": "Home",
         "nav-boys": "Boys",
         "nav-girls": "Girls",
@@ -39,6 +42,9 @@ const translations = {
     },
     "ar": {
         "delivery-bar": "✨ خدمة توصيل سريعة لرام الله والمناطق المجاورة! ✨",
+        "boys-delivery-bar": "💙 ملابس رائعة للأولاد الشجعان - توصيل سريع في رام الله! 💙",
+        "girls-delivery-bar": "🌸 أزياء ساحرة لأميراتنا الصغيرات - تسوقي التشكيلة الآن! 🌸",
+        "newborn-delivery-bar": "🍼 عناية لطيفة لحديثي الولادة - توصيل سريع في رام الله! 🍼",
         "nav-home": "الرئيسية",
         "nav-boys": "الأولاد",
         "nav-girls": "البنات",
