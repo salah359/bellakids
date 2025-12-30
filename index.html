@@ -38,6 +38,9 @@
             50% { transform: translate(0, -20px) scale(1.2); }
             100% { transform: translate(0, 0px) scale(1.2); }
         }
+
+        /* Styling for the new Newborn background */
+        .newborn-bg { background-color: #f3e5f5; } /* Soft Purple/Lavender */
     </style>
 </head>
 <body>
@@ -61,9 +64,7 @@
                     <li class="nav-item"><a class="nav-link" href="index.html" data-i18n-key="nav-home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="boys.html" data-i18n-key="nav-boys">Boys</a></li>
                     <li class="nav-item"><a class="nav-link" href="girls.html" data-i18n-key="nav-girls">Girls</a></li>
-                    <li class="nav-item">
-    <a class="nav-link" href="newborn.html" data-i18n-key="nav-newborn">Newborn</a>
-</li>
+                    <li class="nav-item"><a class="nav-link" href="newborn.html" data-i18n-key="nav-newborn">Newborn</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-3">
                     <button class="btn btn-outline-primary rounded-pill px-3 fw-bold" onclick="toggleLanguage()">
@@ -99,18 +100,25 @@
 
     <section class="container py-5">
         <div class="row g-4">
-            <div class="col-md-6" data-aos="fade-up">
+            <div class="col-md-4" data-aos="fade-up">
                 <div class="cat-card boys-bg p-5 rounded-5 shadow-sm position-relative overflow-hidden">
                     <h2 class="fw-bold" data-i18n-key="boys-cat-title">Cool Boys</h2>
                     <p data-i18n-key="boys-cat-desc">Durable and stylish sets.</p>
                     <a href="boys.html" class="text-dark fw-bold text-decoration-none stretched-link" data-i18n-key="explore">Explore &rarr;</a>
                 </div>
             </div>
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="cat-card girls-bg p-5 rounded-5 shadow-sm position-relative overflow-hidden">
                     <h2 class="fw-bold" data-i18n-key="girls-cat-title">Pretty Girls</h2>
                     <p data-i18n-key="girls-cat-desc">Dresses for every occasion.</p>
                     <a href="girls.html" class="text-dark fw-bold text-decoration-none stretched-link" data-i18n-key="explore">Explore &rarr;</a>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="cat-card newborn-bg p-5 rounded-5 shadow-sm position-relative overflow-hidden">
+                    <h2 class="fw-bold" data-i18n-key="nav-newborn">Newborn</h2>
+                    <p data-i18n-key="newborn-subtitle">Soft touch for new arrivals.</p>
+                    <a href="newborn.html" class="text-dark fw-bold text-decoration-none stretched-link" data-i18n-key="explore">Explore &rarr;</a>
                 </div>
             </div>
         </div>
