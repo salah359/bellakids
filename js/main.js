@@ -296,8 +296,8 @@ function sendToWhatsApp() {
     const isEn = currentLanguage === 'en';
     if (cart.length === 0) return alert(translations[currentLanguage]['empty-bag']);
     
-    let message = isEn ? " *New Order from Bella Kids* \n\n" : " *طلب جديد من بيلا كيدز* \n\n";
-    message += isEn ? "I'd like to order the following items:\n\n" : "أود طلب القطع التالية:\n\n";
+    let message = isEn  " *New Order from Bella Kids* \n\n" : " *طلب جديد من بيلا كيدز* \n\n";
+    message += isEn  "I'd like to order the following items:\n\n" : "أود طلب القطع التالية:\n\n";
 
     const currency = translations[currentLanguage]['currency'];
 
@@ -311,9 +311,10 @@ function sendToWhatsApp() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `--------------------------\n`;
     message += ` *${translations[currentLanguage]['total']} ${currency}${total.toFixed(2)}*\n\n`;
-    message += isEn ? "Please let me know the delivery details! " : "يرجى إعلامي بتفاصيل التوصيل! ";
+    message += isEn  "Please let me know the delivery details!" : "يرجى إعلامي بتفاصيل التوصيل! ";
     
     const phoneNumber = "972598439251"; 
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
+
 
