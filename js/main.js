@@ -53,6 +53,13 @@ const translations = {
         // About Us Page
         "about-title": "Our Story.",
         "about-text-1": "Bella Kids was born in the heart of Ramallah with a simple mission: to provide children with clothes as magical as their imagination.",
+        "about-text-2": "We believe that high-quality fashion should be accessible, comfortable, and durable enough for every adventure.",
+        "value-1-title": "Quality First",
+        "value-1-desc": "We use only the softest organic cotton and premium fabrics safe for your child's skin.",
+        "value-2-title": "Local Heart",
+        "value-2-desc": "Proudly serving the families of Ramallah with fast local delivery and friendly service.",
+        "value-3-title": "Magic Designs",
+        "value-3-desc": "Our collections are hand-picked to ensure your little ones feel like stars every day.",
         "gallery-title": "Visit Our Boutique"
     },
     "ar": {
@@ -99,6 +106,13 @@ const translations = {
         // About Us Page
         "about-title": "قصتنا.",
         "about-text-1": "ولدت بيلا كيدز في قلب رام الله بمهمة بسيطة: تزويد الأطفال بملابس ساحرة مثل خيالهم تماماً.",
+        "about-text-2": "نحن نؤمن بأن الموضة عالية الجودة يجب أن تكون متاحة، مريحة، ومتينة بما يكفي لكل مغامرة.",
+        "value-1-title": "الجودة أولاً",
+        "value-1-desc": "نستخدم فقط أنعم الأقطان العضوية والأقمشة الفاخرة الآمنة لبشرة طفلك.",
+        "value-2-title": "قلب محلي",
+        "value-2-desc": "فخورون بخدمة عائلات رام الله مع توصيل محلي سريع وخدمة ودودة.",
+        "value-3-title": "تصاميم ساحرة",
+        "value-3-desc": "يتم اختيار مجموعاتنا يدوياً لضمان أن يشعر صغارك وكأنهم نجوم كل يوم.",
         "gallery-title": "تفضلوا بزيارة متجرنا"
     }
 };
@@ -115,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
 });
 
-// --- Translation Logic ---
+// --- UPDATED Translation Logic ---
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
     localStorage.setItem('BELLA_LANGUAGE', currentLanguage);
@@ -123,6 +137,7 @@ function toggleLanguage() {
 }
 
 function applyTranslations() {
+    // 1. Loop through all elements that need translation
     document.querySelectorAll('[data-i18n-key]').forEach(element => {
         const key = element.getAttribute('data-i18n-key');
         if (translations[currentLanguage][key]) {
@@ -130,14 +145,17 @@ function applyTranslations() {
         }
     });
 
+    // 2. Handle Search Placeholder separately
     const searchInput = document.getElementById('productSearch');
     if (searchInput) {
         searchInput.placeholder = translations[currentLanguage]['search-placeholder'];
     }
 
+    // 3. Update Document Attributes for Layout (RTL/LTR)
     document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLanguage;
 
+    // 4. Refresh dynamic UI elements
     renderProducts();
     updateCartUI();
 }
@@ -273,9 +291,7 @@ function addToCart(productId, size) {
         cart.push({ ...product, selectedSize: size, quantity: 1 });
     }
 
-    // Trigger the Animation
     runFlyToCartAnimation(product.image);
-
     saveAndUpdate();
 }
 
