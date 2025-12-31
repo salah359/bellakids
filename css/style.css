@@ -45,43 +45,36 @@ body {
     margin: 0 12px;
 }
 
-/* --- FLOATING BUBBLES --- */
-.whatsapp-float {
+/* --- FLOATING BUBBLES (WhatsApp & Bag) --- */
+.whatsapp-float, .cart-float {
     position: fixed;
-    bottom: 30px;
     right: 30px;
-    width: 65px;
-    height: 65px;
-    background-color: #25d366;
+    width: 70px; /* Matched Size */
+    height: 70px; /* Matched Size */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
     z-index: 1000;
     transition: var(--transition);
+    border: 3px solid white; /* Consistent Border */
+}
+
+.whatsapp-float {
+    bottom: 30px;
+    background-color: #25d366;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
 }
 
 .whatsapp-float img {
-    width: 35px;
+    width: 38px; /* Adjusted icon scale */
     height: auto;
 }
 
 .cart-float {
-    position: fixed;
-    bottom: 110px; 
-    right: 30px;
-    width: 70px;
-    height: 70px;
+    bottom: 115px; /* Spaced evenly above WhatsApp */
     background: linear-gradient(135deg, var(--bella-blue), #8ECAE6);
-    border: 3px solid white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 15px 35px rgba(162, 210, 255, 0.5);
-    z-index: 1000;
-    transition: var(--transition);
     font-size: 2rem;
     cursor: pointer;
     animation: cartPulse 3s ease-in-out infinite;
@@ -245,23 +238,26 @@ html[lang="ar"] .social-icon-wrapper { justify-content: flex-start; }
 @media (max-width: 768px) {
     .nav-logo { height: 60px; }
     
-    /* Fixed: Smaller WhatsApp & Cart bubbles for mobile */
-    .whatsapp-float {
-        width: 50px;
-        height: 50px;
+    /* Fixed: Both bubbles identical and perfectly aligned on mobile */
+    .whatsapp-float, .cart-float {
+        width: 55px; /* Matched mobile size */
+        height: 55px; /* Matched mobile size */
         right: 20px;
+    }
+    
+    .whatsapp-float {
         bottom: 20px;
     }
+    
     .whatsapp-float img {
-        width: 26px;
+        width: 28px;
     }
+
     .cart-float {
-        width: 55px;
-        height: 55px;
-        right: 20px;
-        bottom: 85px;
+        bottom: 85px; /* Maintains stacking distance */
         font-size: 1.5rem;
     }
+    
     .cart-float .badge {
         width: 22px;
         height: 22px;
